@@ -2,12 +2,12 @@
 
 ## There is a very useful tool to wrap CSharp assemlby tools within PowerShell can be loaded remotely:
 
-`https://github.com/S3cur3Th1sSh1t/PowerSharpPack`
+https://github.com/S3cur3Th1sSh1t/PowerSharpPack
 
 ## However, sometimes I will need to load some uncommon CSharp tools, this one is used to load CSharp assembly EXE directly in memory (fileless). it will provide a better AV bypass (need AMSI bypass first)
 
 ## Regarding to AMSI bypass, must read this first:
-`https://s3cur3th1ssh1t.github.io/Powershell-and-the-.NET-AMSI-Interface/` 
+https://s3cur3th1ssh1t.github.io/Powershell-and-the-.NET-AMSI-Interface/ 
 
 ### Usage:
 
