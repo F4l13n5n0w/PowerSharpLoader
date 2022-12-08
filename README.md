@@ -15,6 +15,16 @@ https://github.com/S3cur3Th1sSh1t/Amsi-Bypass-Powershell
 ## A golang version AMSI bypass using direct syscalls (improved and much more chance to be successful)
 https://github.com/timwhitez/Doge-AMSI-patch//
 
+To Compile:
+```
+cd /opt/
+git clone https://github.com/timwhitez/Doge-AMSI-patch//
+cd Doge-AMSI-patch
+go mod init amsi
+go mod tidy
+env GOOS=windows GOARCH=amd64 -o dogeamsi.exe ./amsi.go
+```
+
 A compiled version `dogeamsi.exe` is included in this repo for convinence. 
 This one is tested to bypass [**sophos AMSI protection**](https://news.sophos.com/en-us/2021/06/02/amsi-bypasses-remain-tricks-of-the-malware-trade/) successfully.
 
