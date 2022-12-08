@@ -8,6 +8,7 @@ https://github.com/S3cur3Th1sSh1t/PowerSharpPack
 
 ## Regarding to AMSI bypass, must read these first:
 https://s3cur3th1ssh1t.github.io/Powershell-and-the-.NET-AMSI-Interface/
+
 https://github.com/S3cur3Th1sSh1t/Amsi-Bypass-Powershell
 
 
@@ -15,7 +16,7 @@ https://github.com/S3cur3Th1sSh1t/Amsi-Bypass-Powershell
 https://github.com/timwhitez/Doge-AMSI-patch//
 
 A compiled version `dogeamsi.exe` is included in this repo for convinence. 
-This one is tested to bypass [*sophos AMSI protection*](https://news.sophos.com/en-us/2021/06/02/amsi-bypasses-remain-tricks-of-the-malware-trade/) successfully.
+This one is tested to bypass [**sophos AMSI protection**](https://news.sophos.com/en-us/2021/06/02/amsi-bypasses-remain-tricks-of-the-malware-trade/) successfully.
 
 ## To bring back a detected AMSI bypass script alive:
 https://github.com/icyguider/PowerChunker
