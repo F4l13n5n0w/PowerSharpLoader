@@ -12,7 +12,7 @@ https://s3cur3th1ssh1t.github.io/Powershell-and-the-.NET-AMSI-Interface/
 https://github.com/S3cur3Th1sSh1t/Amsi-Bypass-Powershell
 
 
-## A golang version AMSI bypass using direct syscalls (improved and much more chance to be success)
+## A golang version AMSI bypass using direct syscalls (improved and much more chance to be successful)
 https://github.com/timwhitez/Doge-AMSI-patch//
 
 A compiled version `dogeamsi.exe` is included in this repo for convinence. 
