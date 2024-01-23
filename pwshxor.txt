@@ -1,8 +1,8 @@
 $enc = [System.Text.Encoding]::UTF8
 
 function xor {
-    param($string, $method)
-    $xorkey = $enc.GetBytes("secretkey")
+    param($string, $method, $key)
+    $xorkey = $enc.GetBytes($key)
 
     if ($method -eq "decrypt"){
         $string = $enc.GetString([System.Convert]::FromBase64String($string))
