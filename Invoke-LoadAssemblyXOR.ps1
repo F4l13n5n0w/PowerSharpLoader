@@ -2,7 +2,7 @@ $enc = [System.Text.Encoding]::UTF8
 
 function xor {
     param($string, $method)
-    $xorkey = $enc.GetBytes("meow_seckey_meow")
+    $xorkey = $enc.GetBytes("secretkey")
 
     if ($method -eq "decrypt"){
         $string = $enc.GetString([System.Convert]::FromBase64String($string))
