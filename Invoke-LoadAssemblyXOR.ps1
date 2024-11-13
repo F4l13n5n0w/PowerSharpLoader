@@ -51,6 +51,8 @@ function Invoke-LoadAssemblyXOR
     [Byte[]]$AssemblyBytes = [System.Convert]::FromBase64String((xor $xorb64_bin "decrypt" $KeyString));
     $assembly = [System.Reflection.Assembly]::Load($AssemblyBytes)
 
+    Start-Sleep -Seconds 10
+
     $ep = $assembly.EntryPoint
     $ldrcommand = "[" + $ep.reflectedtype.namespace + "." + $ep.reflectedtype.name + "]::" + $ep.name + '($Command.Split(" "))'
     echo $ldrcommand
